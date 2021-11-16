@@ -1,0 +1,87 @@
+{
+    "config_version": {
+        "type": "internal",
+        "defaultValue": 2
+    },
+    "shutdown_option": {
+        "type": "select",
+        "defaultValue": "None",
+        "options": [
+            "None",
+            "Shutdown",
+            "Restart",
+            "Suspend"
+        ],
+        "name": "Shutdown Options",
+        "description": "Select an option after all downloads were completed. Ignored files would be dismissed"
+    },
+    "buffer": {
+        "type": "int",
+        "defaultValue": 60,
+        "placeholder": 0,
+        "min": 0,
+        "name": "Shutdown buffer",
+        "description": "Seconds until shutdown operation is executed"
+    },
+    "abort_shutdown": {
+        "type": "button",
+        "btnType": "submit",
+        "name": "Abort Shutdown",
+        "description": "Abort scheduled shutdown operation"
+    },
+    "retry": {
+        "type": "bool",
+        "defaultValue": true,
+        "name": "Retry Failed Downloads",
+        "description": "Retry doable failed downloads"
+    },
+    "max_retries": {
+        "type": "int",
+        "defaultValue": 10,
+        "placeholder": 10,
+        "min": 0,
+        "max": 60,
+        "name": "Number of Retries",
+        "description": "Number of retry attempts (10 seconds intervals)"
+    },
+    "logging": {
+        "type": "bool",
+        "defaultValue": false,
+        "name": "Logging",
+        "description": "Log extension activities"
+    },
+    "notif_timeout": {
+        "type": "int",
+        "defaultValue": 3000,
+        "placeholder": 3000,
+        "min": 100,
+        "max": 20000,
+        "step": 100,
+        "name": "Notification Timeout",
+        "description": "Time (microsecond) until notification is dismissed"
+    },
+    "notif_sound": {
+        "type": "select",
+        "defaultValue": "None",
+        "options": [
+            "None",
+            "bell",
+            "ding",
+            "pop"
+        ],
+        "name": "Audio Notifications",
+        "description": "Play an audio cue with every notification"
+    },
+    "restore_default": {
+        "type": "button",
+        "btnType": "submit",
+        "name": "Restore Defaults",
+        "description": "Restore default settings"
+    },
+    "save": {
+        "type": "button",
+        "btnType": "submit",
+        "name": "Save",
+        "description": "Save settings"
+    }
+}
