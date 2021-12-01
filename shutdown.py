@@ -1,5 +1,5 @@
 from ctypes import windll
-from flask import Flask, abort, json, request
+from flask import Flask, abort, request
 from flask_cors import CORS
 from os import name, system
 from time import localtime, sleep, time

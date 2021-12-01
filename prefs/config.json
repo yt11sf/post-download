@@ -50,6 +50,12 @@
         "name": "Logging",
         "description": "Log extension activities"
     },
+    "full_logging": {
+        "type": "button",
+        "name": "Full Logging",
+        "btnType": "submit",
+        "description": "Get full details of extension settings and downloading events"
+    },
     "notif_timeout": {
         "type": "int",
         "defaultValue": 3000,

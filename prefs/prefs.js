@@ -221,11 +221,32 @@ function abortShutdown() {
   logging('"abort shutdown"')
 }
 
-function logging(message) {
+function fullLogging() { // log downloading events and interrupted events
+  downloading = 0;
+  message = `"DownloadEvents":\n`;
+  browser.downloads.search({})
+    .then((downloads) => {
+      message += `[\n`;
+      for (const download of downloads) {
+        if (download.state != browser.downloads.State.COMPLETE) {
+          message += `\t{"filename":"${download.filename}","url":"${download.url}","state":"${download.state}","error":"${download.error}"},\n`;
+        }
+      }
+      message.slice(0, -1);
+      message += `],\n`;
+      browser.storage.local.get().then(prefs => {
+        message += JSON.stringify(prefs) + '\n';
+        logging(message);
+      });
+    }, onError)
+}
+
+
+function logging(message) { // not local logging updating
   browser.storage.local.get('logging')
     .then((result) => {
       if (result.logging) {
-        reqServer('log', req = '', message = `"prefs.js": ${message}`);
+        reqServer('log', req = '', message = `{"prefs.js": ${message}}`);
       }
     })
 
@@ -271,7 +292,8 @@ function submitPrefsForm(e) {
     abortShutdown();
   } else if (e.submitter.id == 'save') {
     savePrefs();
-    logging(message);
+  } else if (e.submitter.id == 'full_logging') {
+    fullLogging();
   } else {
     message = `submitPrefsForm submitter not recognized: ${e.submitter.id}`;
     console.log(message);

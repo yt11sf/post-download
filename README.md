@@ -4,7 +4,7 @@ This is a Firefox extension that send request to local Python server for system 
 ## To install:
 1. Make sure Python 3.7+ is installed.
 2. Open terminal and enter `pip install -r requirements.txt` to install required packages.
-3. Run shutdown.py
+3. Run `python shutdown.py`
 4. Open `about:debugging#/runtime/this-firefox` in Firefox.
 5. Click `Load Temporary Add-on` and open `manifest.json`.
 
@@ -13,6 +13,7 @@ This is a Firefox extension that send request to local Python server for system 
 - Chrome compability.
 - Run Python script from client.
 - System privileges for future exe/bash etc.
+- Popup size when firefox not in full screen
 
 ## Notes
 This extension is for personal use only.

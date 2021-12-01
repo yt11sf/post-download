@@ -173,6 +173,7 @@ function onDlChange(download) {
         }
       } else if (download.state == browser.downloads.State.INTERRUPTED) { // Interrupted event
         // retryDownload(download); //! Problematic
+        onDlCompleted(download);
       }
     }, onError);
 }
@@ -256,10 +257,9 @@ function logging(message) {
   browser.storage.local.get('logging')
     .then((result) => {
       if (result.logging) {
-        reqServer('log', req = '', message = `{"source": "main.js",${message}}`);
+        reqServer('log', req = '', message = `{"main.js":${message}}`);
       }
     })
-
 }
 
 function reqServer(typ, req = '', message = '') {
