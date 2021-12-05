@@ -127,10 +127,10 @@ def suspend(buffer, hibernate=False):
 @app.route('/log', methods=['POST'])
 def logging():
     t = localtime(time())
-    date = f'{t.tm_year}-{t.tm_mon}-{t.tm_mday}'
+    date = f'{t.tm_year}-{str(t.tm_mon).rjust(2,"0")}-{str(t.tm_mday).rjust(2,"0")}'
     with open(f'log_{date}.txt', 'a') as f:
         f.write(
-            f'{date}-{t.tm_hour}:{t.tm_min}:{t.tm_sec}\t\t\t{request.json}\n')
+            f'{date}-{str(t.tm_hour).rjust(2,"0")}:{str(t.tm_min).rjust(2,"0")}:{str(t.tm_sec).rjust(2,"0")}\t{request.json}\n')
     return '', 204
 
 

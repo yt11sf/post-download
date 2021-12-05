@@ -13,7 +13,7 @@ This is a Firefox extension that send request to local Python server for system 
 - Chrome compability.
 - Run Python script from client.
 - System privileges for future exe/bash etc.
-- Popup size when firefox not in full screen
+- Popup size of firefox not in full screen
 
 ## Notes
 This extension is for personal use only.
