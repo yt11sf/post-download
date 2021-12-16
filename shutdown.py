@@ -7,7 +7,6 @@ from threading import Thread
 import win32security
 import win32api
 
-KEEP_ALIVE_INV_MS = 15
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -133,33 +132,6 @@ def logging():
             f'{date}-{str(t.tm_hour).rjust(2,"0")}:{str(t.tm_min).rjust(2,"0")}:{str(t.tm_sec).rjust(2,"0")}\t{request.json}\n')
     return '', 204
 
-
-"""
-@app.route('/alive')
-def alive():
-    print(active_count())
-    print(enumerate())
-    if active_count() < 2:
-        global old_t
-        old_t = 0
-        Thread(target=keep_alive).start()
-    old_t = time()
-    return '', 204
-
-
-def keep_alive(timeout=KEEP_ALIVE_INV_MS):
-    global old_t
-    while True:
-        print(time() - old_t, flush=True)
-        if time() - old_t > timeout:
-            break
-        else:
-            sleep(timeout)
-    func = request.environ.get('werkzeug.server.shutdown')
-    if func is None:
-        raise RuntimeError('Not running with the Werkzeug Server')
-    func()
-"""
 
 if __name__ == '__main__':
     app.run()

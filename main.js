@@ -2,7 +2,6 @@ const localURL = 'http://127.0.0.1:5000'; // ! temp url
 const MAX_RECENT_DOWNLOADS = 16;
 const DOWNLOAD_RETRY_INTV = 10 * 1000;
 // const AUDIO_TIMEOUT_MS = 10 * 1000;
-// const KEEP_ALIVE_INV_MS = 5 * 1000;
 var dlProcessed = []; // list of processed completed download events
 var dlRetried = {}; // number of reattempts of failed download event
 var initiated = false;
@@ -40,21 +39,8 @@ function onError(err) {
 function init() {
   notifServerDlding();
   checkConfigVer;
-  // keepAlive()
 }
 
-` // Experimental feature
-function sleep(s) {
-  return new Promise(resolve => setTimeout(resolve, s));
-}
-
-async function keepAlive() {
-  while (true) {
-    reqServer('alive')
-    await sleep(KEEP_ALIVE_INV_MS)
-  }
-}
-`
 
 function loadPrefs(callback) {
   browser.storage.local.get()
@@ -173,7 +159,7 @@ function onDlChange(download) {
         }
       } else if (download.state == browser.downloads.State.INTERRUPTED) { // Interrupted event
         // retryDownload(download); //! Problematic
-        onDlCompleted(download);
+        retryDownload2(download); //! Untested
       }
     }, onError);
 }
@@ -221,6 +207,20 @@ function retryDownload(download) {
         }, DOWNLOAD_RETRY_INTV);
       }
     });
+  } else {
+    console.log(`Unsolvable download: ${download}`);
+    if (!dlRecorded(download)) {
+      onDlCompleted(download);
+    }
+  }
+}
+
+//! Verify needed
+function retryDownload2(download) {
+  if (SOLVABLE_ERR.includes(download.error)) {
+    console.log(`retrying download:`);
+    console.log(download);
+    browser.downloads.resume(download.id);
   } else {
     console.log(`Unsolvable download: ${download}`);
     if (!dlRecorded(download)) {
@@ -283,9 +283,6 @@ function reqServer(typ, req = '', message = '') {
   };
   if (typ == 'req') {
     xhr.open('GET', `${localURL}/req=${req}&${message}`);
-    xhr.send();
-  } else if (typ == 'alive') {
-    xhr.open('GET', `${localURL}/alive`);
     xhr.send();
   } else if (typ == 'log') {
     xhr.open('POST', `${localURL}/log`);

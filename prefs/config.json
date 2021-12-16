@@ -54,7 +54,7 @@
         "type": "button",
         "name": "Full Logging",
         "btnType": "submit",
-        "description": "Get full details of extension settings and downloading events"
+        "description": "Get full details of extension settings and downloading events. Logging must be activated for this fynction."
     },
     "notif_timeout": {
         "type": "int",

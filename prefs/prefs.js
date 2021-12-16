@@ -274,9 +274,6 @@ function reqServer(typ, req = '', message = '') {
   if (typ == 'req') {
     xhr.open('GET', `${localURL}/req=${req}&${message}`);
     xhr.send();
-  } else if (typ == 'alive') {
-    xhr.open('GET', `${localURL}/alive`);
-    xhr.send();
   } else if (typ == 'log') {
     xhr.open('POST', `${localURL}/log`);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
