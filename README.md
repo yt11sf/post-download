@@ -8,12 +8,14 @@ This is a Firefox extension that send request to local Python server for system 
 4. Open `about:debugging#/runtime/this-firefox` in Firefox.
 5. Click `Load Temporary Add-on` and open `manifest.json`.
 
-
 ## TODO:
-- Chrome compability.
 - Run Python script from client.
 - System privileges for future exe/bash etc.
+
+## Bugs:
+- Chrome compability.
 - Popup size of firefox not in full screen
+- Firefox download api still consists of restart download bug...
 
 ## Notes
 This extension is for personal use only.
